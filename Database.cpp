@@ -10,7 +10,7 @@ namespace Records {
 
   Database::Database()
   {
-    mNextEmployeeNumber = kFirstEmployeeNumber;
+    _nextEmployeeNumber = kFirstEmployeeNumber;
   }
   Database::~Database()
   {
@@ -20,15 +20,15 @@ namespace Records {
     Employee theEmployee;
     theEmployee.setFirstName(inFirstName);
     theEmployee.setLastName(inLastName);
-    theEmployee.setEmployeeNumber(mNextEmployeeNumber++);
+    theEmployee.setEmployeeNumber(_nextEmployeeNumber++);
     theEmployee.hire();
-    mEmployees.push_back(theEmployee);
+    _employees.push_back(theEmployee);
 
-    return mEmployees[mEmployees.size()-1];
+    return _employees[_employees.size()-1];
   }
   Employee& Database::getEmployee(int inEmployeeNumber)
   {
-      for (auto iter = mEmployees.begin(); iter != mEmployees.end(); ++iter)
+      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter)
       {
           if (iter->getEmployeeNumber() == inEmployeeNumber)
               return *iter;
@@ -40,7 +40,7 @@ namespace Records {
 
   Employee& Database::getEmployee(string inFirstName, string inLastName)
   {
-      for (auto iter = mEmployees.begin(); iter != mEmployees.end(); ++iter)
+      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter)
       {
           if (iter->getFirstName() == inFirstName &&
               iter->getLastName() == inLastName) {
@@ -53,14 +53,14 @@ namespace Records {
   }
   void Database::displayAll() const
   {
-      for (auto iter = mEmployees.begin(); iter != mEmployees.end(); ++iter) {
+      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
           iter->display();
       }
   }
 
   void Database::displayCurrent() const
   {
-      for (auto iter = mEmployees.begin(); iter != mEmployees.end(); ++iter) {
+      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
           if (iter->getIsHired())
               iter->display();
       }
@@ -68,7 +68,7 @@ namespace Records {
 
   void Database::displayFormer() const
   {
-      for (auto iter = mEmployees.begin(); iter != mEmployees.end(); ++iter) {
+      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
           if (!iter->getIsHired())
               iter->display();
       }

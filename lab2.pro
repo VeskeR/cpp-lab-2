@@ -8,8 +8,10 @@ SOURCES += main.cpp \
     DatabaseTest.cpp \
     Employee.cpp \
     EmployeeTest.cpp \
-    UserInterface.cpp
+    UserInterface.cpp \
+    railroadticket.cpp
 
 HEADERS += \
     Database.h \
-    Employee.h
+    Employee.h \
+    railroadticket.h

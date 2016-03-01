@@ -4,6 +4,8 @@
 #include <vector>
 #include "Employee.h"
 
+using namespace std;
+
 namespace Records {
 	const int kFirstEmployeeNumber = 1000;
 	class Database
@@ -12,14 +14,14 @@ namespace Records {
 		Database();
 		~Database();
 
-		Employee& addEmployee(std::string inFirstName, std::string inLastName);
+        Employee& addEmployee(string inFirstName, string inLastName);
 		Employee& getEmployee(int inEmployeeNumber);
-		Employee& getEmployee(std::string inFirstName, std::string inLastName);
-		void        displayAll() const;
-		void        displayCurrent() const;
-		void        displayFormer() const;
+        Employee& getEmployee(string inFirstName, string inLastName);
+        void displayAll() const;
+        void displayCurrent() const;
+        void displayFormer() const;
 	protected:
-		std::vector<Employee>  mEmployees;
-		int         mNextEmployeeNumber;
+        vector<Employee> _employees;
+        int _nextEmployeeNumber;
 	};
 }
