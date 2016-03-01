@@ -24,7 +24,7 @@ int main()
   cout << endl;
   cout << "All tickets with type 'Platzcart': " << endl;
   cout << endl;
-  myDB.displayByType("Platzcart");
+  myDB.displayByType("Platzkart");
 
   cout << endl;
   cout << "All tickets with train number 42: " << endl;

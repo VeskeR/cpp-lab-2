@@ -8,14 +8,13 @@ using namespace std;
 using namespace Records;
 
 int displayMenu();
-void doHire(Database& inDB);
-void doFire(Database& inDB);
-void doPromote(Database& inDB);
-void doDemote(Database& inDB);
+void addTicket(Database& db);
+void displayByType(Database& db);
+void displayByTrainNumber(Database& db);
 
-int main()
+int start()
 {
-  Database employeeDB;
+  Database ticketDB;
   bool done = false;
 
   while (!done) {
@@ -23,22 +22,15 @@ int main()
 
     switch (selection) {
     case 1:
-      doHire(employeeDB);
+      addTicket(ticketDB);
       break;
     case 2:
-      doFire(employeeDB);
-      break;
+       ticketDB.displayAll();
     case 3:
-      doPromote(employeeDB);
+      displayByType(ticketDB);
       break;
     case 4:
-      employeeDB.displayAll();
-      break;
-    case 5:
-      employeeDB.displayCurrent();
-      break;
-    case 6:
-      employeeDB.displayFormer();
+      displayByTrainNumber(ticketDB);
       break;
     case 0:
       done = true;
@@ -55,14 +47,12 @@ int displayMenu()
   int selection;
 
   cout << endl;
-  cout << "Employee Database" << endl;
+  cout << "Tickets Database" << endl;
   cout << "-----------------" << endl;
-  cout << "1) Hire a new employee" << endl;
-  cout << "2) Fire an employee" << endl;
-  cout << "3) Promote an employee" << endl;
-  cout << "4) List all employees" << endl;
-  cout << "5) List all current employees" << endl;
-  cout << "6) List all previous employees" << endl;
+  cout << "1) Add a new ticket" << endl;
+  cout << "2) Display all tickets" << endl;
+  cout << "3) Display all tickets with type" << endl;
+  cout << "4) Display all tickets with train number" << endl;
   cout << "0) Quit" << endl;
   cout << endl;
   cout << "---> ";
@@ -72,54 +62,54 @@ int displayMenu()
   return selection;
 }
 
-void doHire(Database& inDB)
+void addTicket(Database& inDB)
 {
-  string firstName;
-  string lastName;
+  string passengerName;
+  string from;
+  string to;
+  string type;
+  int trainNumber;
+  int coachNumber;
+  int seatNumber;
 
-  cout << "First name? ";
-  cin >> firstName;
-  cout << "Last name? ";
-  cin >> lastName;
+  cout << "Passenger name? ";
+  cin >> passengerName;
+  cout << "From location? ";
+  cin >> from;
+  cout << "To location? ";
+  cin >> to;
+  cout << "Ticket type? ";
+  cin >> type;
+  cout << "Train number? ";
+  cin >> trainNumber;
+  cout << "Coach number? ";
+  cin >> coachNumber;
+  cout << "Seat number? ";
+  cin >> seatNumber;
 
   try {
-    inDB.addEmployee(firstName, lastName);
+    inDB.addTicket(passengerName, from, to, type, trainNumber, coachNumber, seatNumber);
   } catch (const std::exception&) { 
     cerr << "Unable to add new employee!" << endl;
   }
 }
 
-void doFire(Database& inDB)
+void displayByType(Database &db)
 {
-  int employeeNumber;
+    string type;
 
-  cout << "Employee number? ";
-  cin >> employeeNumber;
+    cout << "Type of tickets to show? ";
+    cin >> type;
 
-  try {
-    Employee& emp = inDB.getEmployee(employeeNumber);
-    emp.fire();
-    cout << "Employee " << employeeNumber << " has been terminated." << endl;
-  } catch (const std::exception&) {
-    cerr << "Unable to terminate employee!" << endl;
-  }
+    db.displayByType(type);
 }
 
-void doPromote(Database& inDB)
+void displayByTrainNumber(Database &db)
 {
-  int employeeNumber;
-  int raiseAmount;
+    int trainNumber;
 
-  cout << "Employee number? ";
-  cin >> employeeNumber;
+    cout << "Train number of tickets to show? ";
+    cin >> trainNumber;
 
-  cout << "How much of a raise? ";
-  cin >> raiseAmount;
-
-  try {
-    Employee& emp = inDB.getEmployee(employeeNumber);
-    emp.promote(raiseAmount);
-  } catch (const std::exception&) {
-    cerr << "Unable to promote employee!" << endl;
-  }
+    db.displayByTrainNumber(trainNumber);
 }

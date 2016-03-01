@@ -53,7 +53,7 @@ namespace Records {
   void Database::displayAll()
   {
       for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
-          cout << iter->toString() << endl;
+          cout << iter->toString() << endl << endl;
       }
   }
 
@@ -61,15 +61,15 @@ namespace Records {
   {
       for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
           if (iter->getTicketType() == type)
-              cout << iter->toString() << endl;
+              cout << iter->toString() << endl << endl;
       }
   }
 
   void Database::displayByTrainNumber(int trainNumber)
   {
       for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
-          if (!iter->getTrainNumber() == trainNumber)
-              cout << iter->toString() << endl;
+          if (iter->getTrainNumber() == trainNumber)
+              cout << iter->toString() << endl << endl;
       }
   }
 }
