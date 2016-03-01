@@ -18,8 +18,8 @@ namespace Records {
         RailroadTicket& getTicket(int ticketId);
         RailroadTicket& getTicket(string passengerName);
         void displayAll();
-        void displayCurrent();
-        void displayFormer();
+        void displayByType(string type);
+        void displayByTrainNumber(int trainNumber);
 	protected:
         vector<RailroadTicket> _tickets;
         int _nextTicketNumber;
