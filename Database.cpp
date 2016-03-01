@@ -10,67 +10,66 @@ namespace Records {
 
   Database::Database()
   {
-    _nextEmployeeNumber = kFirstEmployeeNumber;
+    _nextTicketNumber = 0;
   }
+
   Database::~Database()
   {
   }
-  Employee& Database::addEmployee(string inFirstName, string inLastName)
-  {
-    Employee theEmployee;
-    theEmployee.setFirstName(inFirstName);
-    theEmployee.setLastName(inLastName);
-    theEmployee.setEmployeeNumber(_nextEmployeeNumber++);
-    theEmployee.hire();
-    _employees.push_back(theEmployee);
 
-    return _employees[_employees.size()-1];
-  }
-  Employee& Database::getEmployee(int inEmployeeNumber)
+  RailroadTicket& Database::addTicket(string passengerName, string from, string to, string type,
+                                      int trainNumber, int coachNumber, int seatNumber)
   {
-      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter)
+    RailroadTicket ticket(passengerName, from, to, type, trainNumber, coachNumber, seatNumber);
+    _tickets.push_back(ticket);
+    return _tickets[_tickets.size()-1];
+  }
+
+  RailroadTicket& Database::getTicket(int ticketId)
+  {
+      for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter)
       {
-          if (iter->getEmployeeNumber() == inEmployeeNumber)
+          if (iter->getTicketId() == ticketId)
               return *iter;
       }
 
-      cerr << "No employee with employee number " << inEmployeeNumber << endl;
+      cerr << "No ticket with ticket id " << ticketId << endl;
       throw exception();
   }
 
-  Employee& Database::getEmployee(string inFirstName, string inLastName)
+  RailroadTicket& Database::getTicket(string passengerName)
   {
-      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter)
+      for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter)
       {
-          if (iter->getFirstName() == inFirstName &&
-              iter->getLastName() == inLastName) {
+          if (iter->getPassengerName() == passengerName) {
                   return *iter;
           }
       }
 
-      cerr << "No match with name " << inFirstName << " " << inLastName << endl;
+      cerr << "No ticket with passenger name " << passengerName << endl;
       throw exception();
   }
-  void Database::displayAll() const
+
+  void Database::displayAll()
   {
-      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
-          iter->display();
+      for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
+          cout << iter->toString() << endl;
       }
   }
 
-  void Database::displayCurrent() const
+  void Database::displayByType(string type)
   {
-      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
-          if (iter->getIsHired())
-              iter->display();
+      for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
+          if (iter->getTicketType() == type)
+              cout << iter->toString() << endl;
       }
   }
 
-  void Database::displayFormer() const
+  void Database::displayByTrainNumber(int trainNumber)
   {
-      for (auto iter = _employees.begin(); iter != _employees.end(); ++iter) {
-          if (!iter->getIsHired())
-              iter->display();
+      for (auto iter = _tickets.begin(); iter != _tickets.end(); ++iter) {
+          if (!iter->getTrainNumber() == trainNumber)
+              cout << iter->toString() << endl;
       }
   }
 }

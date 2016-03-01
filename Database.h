@@ -2,26 +2,26 @@
 
 #include <iostream>
 #include <vector>
-#include "Employee.h"
+#include "railroadticket.h"
 
 using namespace std;
 
 namespace Records {
-	const int kFirstEmployeeNumber = 1000;
 	class Database
 	{
 	public:
 		Database();
 		~Database();
 
-        Employee& addEmployee(string inFirstName, string inLastName);
-		Employee& getEmployee(int inEmployeeNumber);
-        Employee& getEmployee(string inFirstName, string inLastName);
-        void displayAll() const;
-        void displayCurrent() const;
-        void displayFormer() const;
+        RailroadTicket& addTicket(string passengerName, string from, string to, string type,
+                                  int trainNumber, int coachNumber, int seatNumber);
+        RailroadTicket& getTicket(int ticketId);
+        RailroadTicket& getTicket(string passengerName);
+        void displayAll();
+        void displayCurrent();
+        void displayFormer();
 	protected:
-        vector<Employee> _employees;
-        int _nextEmployeeNumber;
+        vector<RailroadTicket> _tickets;
+        int _nextTicketNumber;
 	};
 }
